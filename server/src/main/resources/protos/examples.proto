@@ -1,0 +1,35 @@
+syntax = "proto3";
+package com.smarter.grpcexample;
+option java_package = "com.smarter.grpc";
+option java_outer_classname = "ExampleGrpc";
+option csharp_namespace = "ExternalServices.Grpc.Example";
+
+message SimpleMessage {
+    string Message = 1;
+}
+message CustomData {
+    string Template = 1;
+    string JsonExtras = 2;
+}
+message ComplexMessage {
+    string XML = 1;
+    string User = 2;
+    bool Image = 3;
+    int32 Cost = 4;
+    CustomData AditionalData = 5;
+}
+message SimpleResponse {
+    string Response = 1;
+}
+message ComplexResponse {
+    string Message = 1;
+    string UUIDTransaccion = 2;
+}
+
+service ExampleService {
+    rpc SimpleRPC(SimpleMessage) returns (SimpleResponse) {};
+    rpc SimpleRPCs(stream SimpleMessage) returns (stream SimpleResponse) {};
+    rpc ComplexRPC(ComplexMessage) returns (ComplexResponse) {};
+    rpc ComplexRPCs(stream ComplexMessage) returns (stream ComplexResponse) {};
+    rpc SayHi(stream SimpleMessage) returns (SimpleResponse) {};
+}
